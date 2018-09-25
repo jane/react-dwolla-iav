@@ -1,6 +1,6 @@
 {
   "name": "react-dwolla-iav",
-  "description": "react-dwolla-iav",
+  "description": "React Wrapper for Dwolla IAV Widget",
   "version": "0.0.1",
   "author": {
     "name": "Zac Anger",
@@ -20,8 +20,9 @@
   },
   "bugs": "https://github.com/zacanger/react-dwolla-iav/issues",
   "keywords": [
-    "",
-    "react-dwolla-iav"
+    "dwolla",
+    "iav",
+    "react"
   ],
   "dependencies": {},
   "devDependencies": {},

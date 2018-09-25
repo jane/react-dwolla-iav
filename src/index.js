@@ -28,13 +28,14 @@ export const load = (environment) =>
     }
   )
 
+const containerId = 'react-dwolla-iav-container'
+
 export default class Dwolla extends React.Component {
   static propTypes = {
     onSuccess: func.isRequired,
     onError: func.isRequired,
     dwollaConfig: shape({
       backButton: bool,
-      container: string.isRequired,
       customerToken: string.isRequired,
       environment: oneOf([ 'prod', 'sandbox' ]).isRequired,
       fallbackToMicroDeposits: bool,
@@ -48,16 +49,20 @@ export default class Dwolla extends React.Component {
     try {
       const { customerToken, dwollaConfig: { environment }, dwollaConfig } =  this.props
       await load(environment)
-      window.dwolla.iav.start(customerToken, dwollaConfig, (err, res) => {
-        if (err) throw err
-        this.props.onSuccess(res)
-      })
+      window.dwolla.iav.start(
+        customerToken,
+        { ...dwollaConfig, container: containerId },
+        (err, res) => {
+          if (err) throw err
+          this.props.onSuccess(res)
+        }
+      )
     } catch (e) {
       this.props.onError(e)
     }
   }
 
   render () {
-    return <div id={this.props.dwollaConfig.container} />
+    return <div id={containerId} />
   }
 }

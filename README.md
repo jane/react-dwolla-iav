@@ -10,8 +10,8 @@ Dwolla doesn't provide a library for their `Dwolla.js` client-side scripts. This
 component wraps their script and provides a React component for embedding their
 IAV flow.
 
-[IAV demo](https://iavdemo.dwolla.com/)
-[`dwollaConfig` docs](https://developers.dwolla.com/resources/dwolla-js/instant-account-verification.html#dwolla-iav-start)
+* [IAV demo](https://iavdemo.dwolla.com/)
+* [`dwollaConfig` docs](https://developers.dwolla.com/resources/dwolla-js/instant-account-verification.html#dwolla-iav-start)
 
 ```javascript
 import * as React from 'react'

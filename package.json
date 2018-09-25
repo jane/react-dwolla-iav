@@ -8,10 +8,13 @@
     "url": "https://zacanger.com"
   },
   "license": "MIT",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "start": "node index",
-    "test": ""
+    "preversion": "npm run build",
+    "test": "npm run test:lint",
+    "test:lint": "eslint -c .eslintrc.json src",
+    "prebuild": "npm t",
+    "build": "babel src/ -d lib/"
   },
   "homepage": "https://github.com/zacanger/react-dwolla-iav#readme",
   "repository": {
@@ -25,7 +28,24 @@
     "react"
   ],
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "7.1.0",
+    "@babel/core": "7.1.0",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-eslint": "9.0.0",
+    "babel-plugin-transform-react-remove-prop-types": "0.4.18",
+    "eslint": "5.6.0",
+    "eslint-config-zacanger": "3.4.1",
+    "eslint-plugin-babel": "5.2.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-promise": "4.0.1",
+    "eslint-plugin-react": "7.11.1",
+    "eslint-plugin-unicorn": "6.0.1",
+    "react": "16.5.2",
+    "react-dom": "16.5.2"
+  },
   "engines": {
     "node": ">=10.0.0"
   }

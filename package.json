@@ -1,0 +1,31 @@
+{
+  "name": "react-dwolla-iav",
+  "description": "react-dwolla-iav",
+  "version": "0.0.1",
+  "author": {
+    "name": "Zac Anger",
+    "email": "zac@zacanger.com",
+    "url": "https://zacanger.com"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": ""
+  },
+  "homepage": "https://github.com/zacanger/react-dwolla-iav#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zacanger/react-dwolla-iav.git"
+  },
+  "bugs": "https://github.com/zacanger/react-dwolla-iav/issues",
+  "keywords": [
+    "",
+    "react-dwolla-iav"
+  ],
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}

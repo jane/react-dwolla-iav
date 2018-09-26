@@ -1,60 +1,73 @@
-import * as React from 'react'
-import {
-  arrayOf,
-  bool,
-  func,
-  oneOf,
-  shape,
-  string,
-} from 'prop-types'
+// @flow
 
-export const load = (environment) =>
+import * as React from 'react'
+
+export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
   new Promise(
-    (resolve) => {
+    (resolve): void => {
       const s = document.createElement('script')
       s.type = 'text/javascript'
       s.async = true
       s.src = environment === 'prod'
         ? 'https://cdn.dwolla.com/1/dwolla.min.js'
         : 'https://cdn.dwolla.com/1/dwolla.js'
+
       s.addEventListener(
         'load',
-        () => {
+        (): void => {
           window.dwolla.configure(environment)
         }
       )
+      // $FlowFixMe
       document.body.appendChild(s)
       resolve()
     }
   )
 
+type DwollaIAVResponse = {
+  _links: {
+    'funding-source': {
+      href: string
+    }
+  }
+}
+
+const pluckFundingSource = (res: DwollaIAVResponse): string => {
+  try {
+    const href = res._links['funding-source'].href.split('/')
+    return href[href.length - 1]
+  } catch (_) {
+    return ''
+  }
+}
+
 const containerId = 'react-dwolla-iav-container'
 
-export default class Dwolla extends React.Component {
-  static propTypes = {
-    onSuccess: func.isRequired,
-    onError: func.isRequired,
-    dwollaConfig: shape({
-      backButton: bool,
-      customerToken: string.isRequired,
-      environment: oneOf([ 'prod', 'sandbox' ]).isRequired,
-      fallbackToMicroDeposits: bool,
-      microDeposits: bool,
-      stylesheets: arrayOf(string),
-      subscriber: func
-    })
+type DwollaProps = {
+  onSuccess: (string) => void,
+  onError: (Error) => void,
+  dwollaConfig: {
+    backButton?: bool,
+    customerToken: string,
+    environment: 'prod' | 'sandbox',
+    fallbackToMicroDeposits?: bool,
+    microDeposits?: bool,
+    stylesheets?: string[],
+    subscriber: (mixed) => void
   }
+}
 
+export default class Dwolla extends React.Component<DwollaProps, {}> {
   async componentDidMount () {
     try {
-      const { customerToken, dwollaConfig: { environment }, dwollaConfig } =  this.props
+      const { dwollaConfig: { environment, customerToken }, dwollaConfig } =  this.props
       await load(environment)
       window.dwolla.iav.start(
         customerToken,
         { ...dwollaConfig, container: containerId },
-        (err, res) => {
+        (err: Error, res: DwollaIAVResponse) => {
           if (err) throw err
-          this.props.onSuccess(res)
+          this.props.onSuccess(pluckFundingSource(res))
         }
       )
     } catch (e) {

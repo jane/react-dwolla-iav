@@ -10,13 +10,13 @@
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
+    "build": "babel src/ -d lib/",
+    "postbuild": "flow-copy-source src lib",
+    "prebuild": "npm t",
     "preversion": "npm run build",
     "test": "run-s -s test:lint test:flow",
     "test:flow": "flow check",
-    "test:lint": "eslint -c .eslintrc.json src",
-    "prebuild": "npm t",
-    "build": "babel src/ -d lib/",
-    "postbuild": "flow-copy-source src lib"
+    "test:lint": "eslint -c .eslintrc.json src"
   },
   "homepage": "https://github.com/zacanger/react-dwolla-iav#readme",
   "repository": {

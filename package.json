@@ -1,7 +1,7 @@
 {
   "name": "react-dwolla-iav",
   "description": "React Wrapper for Dwolla IAV Widget",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "author": {
     "name": "Zac Anger",
     "email": "zac@zacanger.com",

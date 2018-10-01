@@ -16,11 +16,11 @@ export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
         'load',
         (): void => {
           window.dwolla.configure(environment)
+          resolve()
         }
       )
       // $FlowFixMe
       document.body.appendChild(s)
-      resolve()
     }
   )
 
@@ -61,7 +61,7 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
   componentDidMount (): void {
     const { dwollaConfig: { environment, customerToken }, dwollaConfig } = this.props
     load(environment)
-      .then(() => {
+      .then((): void => {
         window.dwolla.iav.start(
           customerToken,
           { ...dwollaConfig, container: containerId },

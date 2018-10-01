@@ -41,11 +41,11 @@ const pluckFundingSource = (res: DwollaIAVResponse): string => {
   }
 }
 
-const containerId = 'react-dwolla-iav-container'
+const containerId = '__react-dwolla-iav-container'
 
 type DwollaProps = {
   onSuccess: (string) => void,
-  onError: (Error) => void,
+  onError: (string) => void,
   dwollaConfig: {
     backButton?: bool,
     customerToken: string,
@@ -58,15 +58,15 @@ type DwollaProps = {
 }
 
 export default class Dwolla extends React.Component<DwollaProps, {}> {
-  async componentDidMount () {
+  async componentDidMount (): Promise<void> {
     try {
-      const { dwollaConfig: { environment, customerToken }, dwollaConfig } =  this.props
+      const { dwollaConfig: { environment, customerToken }, dwollaConfig } = this.props
       await load(environment)
       window.dwolla.iav.start(
         customerToken,
         { ...dwollaConfig, container: containerId },
-        (err: Error, res: DwollaIAVResponse) => {
-          if (err) throw err
+        (err: string, res: DwollaIAVResponse): void => {
+          if (err) this.props.onError(err)
           this.props.onSuccess(pluckFundingSource(res))
         }
       )
@@ -75,7 +75,9 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
     }
   }
 
-  render () {
+  render (): React$Element<'div'> {
     return <div id={containerId} />
   }
 }
+
+// vim:syn=typescript

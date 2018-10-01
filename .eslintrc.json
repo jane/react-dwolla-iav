@@ -1,4 +1,10 @@
 {
   "root": true,
-  "extends": "eslint-config-zacanger"
+  "extends": [
+    "eslint-config-zacanger",
+    "plugin:flowtype/recommended"
+  ],
+  "rules": {
+    "flowtype/boolean-style": [ 2, "bool" ]
+  }
 }

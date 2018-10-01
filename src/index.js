@@ -58,21 +58,22 @@ type DwollaProps = {
 }
 
 export default class Dwolla extends React.Component<DwollaProps, {}> {
-  async componentDidMount (): Promise<void> {
-    try {
-      const { dwollaConfig: { environment, customerToken }, dwollaConfig } = this.props
-      await load(environment)
-      window.dwolla.iav.start(
-        customerToken,
-        { ...dwollaConfig, container: containerId },
-        (err: string, res: DwollaIAVResponse): void => {
-          if (err) this.props.onError(err)
-          this.props.onSuccess(pluckFundingSource(res))
-        }
-      )
-    } catch (e) {
-      this.props.onError(e)
-    }
+  componentDidMount (): void {
+    const { dwollaConfig: { environment, customerToken }, dwollaConfig } = this.props
+    load(environment)
+      .then(() => {
+        window.dwolla.iav.start(
+          customerToken,
+          { ...dwollaConfig, container: containerId },
+          (err: string, res: DwollaIAVResponse): void => {
+            if (err) this.props.onError(err)
+            this.props.onSuccess(pluckFundingSource(res))
+          }
+        )
+      })
+      .catch((e) => {
+        this.props.onError(e)
+      })
   }
 
   render (): React$Element<'div'> {

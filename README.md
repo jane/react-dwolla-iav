@@ -41,6 +41,9 @@ export default () => (
 )
 ```
 
+This library assumes your environment has Promises, so you might need a
+polyfill for old browers.
+
 ## License
 
 [MIT](./LICENSE.md)

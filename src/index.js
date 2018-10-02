@@ -24,6 +24,11 @@ export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
     }
   )
 
+type DwollaIAVError = {
+  code: string,
+  message: string
+}
+
 type DwollaIAVResponse = {
   _links: {
     'funding-source': {
@@ -65,13 +70,13 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
         window.dwolla.iav.start(
           customerToken,
           { ...dwollaConfig, container: containerId },
-          (err: string, res: DwollaIAVResponse): void => {
-            if (err) this.props.onError(err)
+          (err: DwollaIAVError, res: DwollaIAVResponse): void => {
+            if (err) this.props.onError(err.message || err.code)
             this.props.onSuccess(pluckFundingSource(res))
           }
         )
       })
-      .catch((e) => {
+      .catch((e): void => {
         this.props.onError(e)
       })
   }

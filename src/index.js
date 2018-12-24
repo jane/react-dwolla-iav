@@ -4,13 +4,14 @@ import * as React from 'react'
 
 export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
   new Promise(
-    (resolve): void => {
+    (resolve: () => void): void => {
       const s = document.createElement('script')
       s.type = 'text/javascript'
       s.async = true
-      s.src = environment === 'prod'
-        ? 'https://cdn.dwolla.com/1/dwolla.min.js'
-        : 'https://cdn.dwolla.com/1/dwolla.js'
+      s.src =
+        environment === 'prod'
+          ? 'https://cdn.dwolla.com/1/dwolla.min.js'
+          : 'https://cdn.dwolla.com/1/dwolla.js'
 
       s.addEventListener(
         'load',
@@ -26,15 +27,15 @@ export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
 
 type DwollaIAVError = {
   code: string,
-  message: string
+  message: string,
 }
 
 type DwollaIAVResponse = {
   _links: {
     'funding-source': {
-      href: string
-    }
-  }
+      href: string,
+    },
+  },
 }
 
 const pluckFundingSource = (res: DwollaIAVResponse): string => {
@@ -52,36 +53,43 @@ type DwollaProps = {
   onSuccess: (string) => void,
   onError: (string) => void,
   dwollaConfig: {
-    backButton?: bool,
+    backButton?: boolean,
     customerToken: string,
     environment: 'prod' | 'sandbox',
-    fallbackToMicroDeposits?: bool,
-    microDeposits?: bool,
+    fallbackToMicroDeposits?: boolean,
+    microDeposits?: boolean,
     stylesheets?: string[],
-    subscriber: (mixed) => void
-  }
+    subscriber: (mixed) => void,
+  },
 }
 
 export default class Dwolla extends React.Component<DwollaProps, {}> {
-  componentDidMount (): void {
-    const { dwollaConfig: { environment, customerToken }, dwollaConfig } = this.props
+  componentDidMount(): void {
+    const {
+      dwollaConfig: { environment, customerToken },
+      dwollaConfig,
+    } = this.props
     load(environment)
-      .then((): void => {
-        window.dwolla.iav.start(
-          customerToken,
-          { ...dwollaConfig, container: containerId },
-          (err: DwollaIAVError, res: DwollaIAVResponse): void => {
-            if (err) this.props.onError(err.message || err.code)
-            this.props.onSuccess(pluckFundingSource(res))
-          }
-        )
-      })
-      .catch((e): void => {
-        this.props.onError(e)
-      })
+      .then(
+        (): void => {
+          window.dwolla.iav.start(
+            customerToken,
+            { ...dwollaConfig, container: containerId },
+            (err: DwollaIAVError, res: DwollaIAVResponse): void => {
+              if (err) this.props.onError(err.message || err.code)
+              this.props.onSuccess(pluckFundingSource(res))
+            }
+          )
+        }
+      )
+      .catch(
+        (e: string): void => {
+          this.props.onError(e)
+        }
+      )
   }
 
-  render (): React$Element<'div'> {
+  render(): React$Element<'div'> {
     return <div id={containerId} />
   }
 }

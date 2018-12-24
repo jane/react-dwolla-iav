@@ -11,6 +11,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src/ -d lib/",
+    "format": "prettier --write \"src/*.js\"",
     "postbuild": "flow-copy-source src lib",
     "prebuild": "npm t",
     "preversion": "npm run build",
@@ -18,12 +19,12 @@
     "test:flow": "flow check",
     "test:lint": "eslint -c .eslintrc.json src"
   },
-  "homepage": "https://github.com/zacanger/react-dwolla-iav#readme",
+  "homepage": "https://github.com/jane/react-dwolla-iav#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zacanger/react-dwolla-iav.git"
+    "url": "https://github.com/jane/react-dwolla-iav.git"
   },
-  "bugs": "https://github.com/zacanger/react-dwolla-iav/issues",
+  "bugs": "https://github.com/jane/react-dwolla-iav/issues",
   "keywords": [
     "dwolla",
     "iav",
@@ -37,18 +38,12 @@
     "@babel/preset-env": "7.2.3",
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
-    "babel-eslint": "10.0.1",
     "eslint": "5.11.0",
-    "eslint-config-zacanger": "3.4.2",
-    "eslint-plugin-babel": "5.3.0",
-    "eslint-plugin-flowtype": "3.2.0",
-    "eslint-plugin-import": "2.14.0",
-    "eslint-plugin-promise": "4.0.1",
-    "eslint-plugin-react": "7.11.1",
-    "eslint-plugin-unicorn": "6.0.1",
+    "eslint-plugin-jane": "1.1.1",
     "flow-bin": "0.89.0",
     "flow-copy-source": "2.0.2",
     "npm-run-all": "4.1.5",
+    "prettier": "1.15.3",
     "react": "16.7.0",
     "react-dom": "16.7.0"
   },

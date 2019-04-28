@@ -3,8 +3,8 @@
   "description": "React Wrapper for Dwolla IAV Widget",
   "version": "1.1.1",
   "author": {
-    "name": "Zac Anger",
     "email": "zac@zacanger.com",
+    "name": "Zac Anger",
     "url": "https://zacanger.com"
   },
   "license": "MIT",
@@ -13,7 +13,7 @@
     "build": "babel src/ -d lib/",
     "format": "prettier --write \"src/*.js\"",
     "postbuild": "flow-copy-source src lib",
-    "prebuild": "npm t",
+    "prebuild": "npm t && sortpack",
     "preversion": "npm run build",
     "test": "run-s -s test:lint test:flow",
     "test:flow": "flow check",
@@ -32,20 +32,21 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.3.4",
-    "@babel/plugin-proposal-class-properties": "7.3.4",
-    "@babel/preset-env": "7.3.4",
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.4",
+    "@babel/plugin-proposal-class-properties": "7.4.4",
+    "@babel/preset-env": "7.4.4",
     "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
-    "eslint": "5.15.1",
-    "eslint-plugin-jane": "3.1.2",
-    "flow-bin": "0.94.0",
+    "eslint": "5.16.0",
+    "eslint-plugin-jane": "5.0.0",
+    "flow-bin": "0.98.0",
     "flow-copy-source": "2.0.3",
     "npm-run-all": "4.1.5",
-    "prettier": "1.16.4",
-    "react": "16.8.4",
-    "react-dom": "16.8.4"
+    "prettier": "1.17.0",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "sortpack": "1.1.5"
   },
   "engines": {
     "node": ">=10.0.0"

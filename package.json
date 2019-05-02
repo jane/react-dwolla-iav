@@ -10,14 +10,14 @@
   "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel src/ -d lib/",
-    "format": "prettier --write \"src/*.js\"",
-    "postbuild": "flow-copy-source src lib",
-    "prebuild": "npm t && sortpack",
+    "build": "babel --extensions .tsx src/ -d lib/",
+    "format": "prettier --write \"src/*.tsx\"",
+    "postbuild": "tsc --emitDeclarationOnly 2>&1 >/dev/null || true",
+    "prebuild": "run-s -s clean test format",
+    "clean": "rm -rf lib && mkdir -p lib",
     "preversion": "npm run build",
-    "test": "run-s -s test:lint test:flow",
-    "test:flow": "flow check",
-    "test:lint": "eslint -c .eslintrc.json src"
+    "test": "run-s -s test:lint",
+    "test:lint": "eslint --ext .tsx -c .eslintrc.json src"
   },
   "homepage": "https://github.com/jane/react-dwolla-iav#readme",
   "repository": {
@@ -36,17 +36,18 @@
     "@babel/core": "7.4.4",
     "@babel/plugin-proposal-class-properties": "7.4.4",
     "@babel/preset-env": "7.4.4",
-    "@babel/preset-flow": "7.0.0",
     "@babel/preset-react": "7.0.0",
+    "@babel/preset-typescript": "7.3.3",
+    "@types/react": "16.8.15",
+    "@types/react-dom": "16.8.4",
     "eslint": "5.16.0",
-    "eslint-plugin-jane": "5.0.0",
-    "flow-bin": "0.98.0",
-    "flow-copy-source": "2.0.3",
+    "eslint-plugin-jane": "5.1.7",
     "npm-run-all": "4.1.5",
     "prettier": "1.17.0",
     "react": "16.8.6",
     "react-dom": "16.8.6",
-    "sortpack": "1.1.5"
+    "sortpack": "1.1.5",
+    "typescript": "3.4.5"
   },
   "engines": {
     "node": ">=10.0.0"

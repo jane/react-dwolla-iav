@@ -1,5 +1,7 @@
 # react-dwolla-iav
 
+![npm version](https://img.shields.io/npm/v/react-dwolla-iav.svg)](https://npm.im/react-dwolla-iav) [![CircleCI](https://circleci.com/gh/jane/react-dwolla-iav.svg?style=svg)](https://circleci.com/gh/jane/react-dwolla-iav)
+
 --------
 
 ## Installation and Usage
@@ -10,8 +12,7 @@ Dwolla doesn't provide a library for their `Dwolla.js` client-side scripts. This
 component wraps their script and provides a React component for embedding their
 IAV flow.
 
-* [IAV demo](https://iavdemo.dwolla.com/)
-* [`dwollaConfig` docs](https://developers.dwolla.com/resources/dwolla-js/instant-account-verification.html#dwolla-iav-start)
+[`dwollaConfig` docs](https://developers.dwolla.com/resources/dwolla-js/instant-account-verification.html#dwolla-iav-start)
 
 ```javascript
 import * as React from 'react'
@@ -27,7 +28,7 @@ const dwollaConfig = {
   fallbackToMicroDeposits: false,
   microDeposits: false,
   stylesheets: [],
-  subscriber: () => {}
+  subscriber: () => {},
 }
 
 export default () => (

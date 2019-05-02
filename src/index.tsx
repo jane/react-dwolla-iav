@@ -1,5 +1,3 @@
-// @flow
-
 import * as React from 'react'
 
 export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
@@ -20,22 +18,22 @@ export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
           resolve()
         }
       )
-      // $FlowFixMe
+
       document.body.appendChild(s)
     }
   )
 
 type DwollaIAVError = {
-  code: string,
-  message: string,
+  code: string
+  message: string
 }
 
 type DwollaIAVResponse = {
   _links: {
     'funding-source': {
-      href: string,
-    },
-  },
+      href: string
+    }
+  }
 }
 
 const pluckFundingSource = (res: DwollaIAVResponse): string => {
@@ -50,17 +48,17 @@ const pluckFundingSource = (res: DwollaIAVResponse): string => {
 const containerId = '__react-dwolla-iav-container'
 
 type DwollaProps = {
-  onSuccess: (string) => void,
-  onError: (string) => void,
+  onSuccess: (string) => void
+  onError: (string) => void
   dwollaConfig: {
-    backButton?: boolean,
-    customerToken: string,
-    environment: 'prod' | 'sandbox',
-    fallbackToMicroDeposits?: boolean,
-    microDeposits?: boolean,
-    stylesheets?: string[],
-    subscriber: (mixed) => void,
-  },
+    backButton?: boolean
+    customerToken: string
+    environment: 'prod' | 'sandbox'
+    fallbackToMicroDeposits?: boolean
+    microDeposits?: boolean
+    stylesheets?: Array<string>
+    subscriber: (mixed) => void
+  }
 }
 
 export default class Dwolla extends React.Component<DwollaProps, {}> {
@@ -72,6 +70,7 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
     load(environment)
       .then(
         (): void => {
+          // @ts-ignore
           window.dwolla.iav.start(
             customerToken,
             { ...dwollaConfig, container: containerId },
@@ -91,9 +90,7 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
       )
   }
 
-  render(): React$Element<'div'> {
+  render() {
     return <div id={containerId} />
   }
 }
-
-// vim:syn=typescript

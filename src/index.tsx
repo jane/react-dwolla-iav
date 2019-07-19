@@ -1,27 +1,22 @@
 import * as React from 'react'
 
 export const load = (environment: 'prod' | 'sandbox'): Promise<void> =>
-  new Promise(
-    (resolve: () => void): void => {
-      const s = document.createElement('script')
-      s.type = 'text/javascript'
-      s.async = true
-      s.src =
-        environment === 'prod'
-          ? 'https://cdn.dwolla.com/1/dwolla.min.js'
-          : 'https://cdn.dwolla.com/1/dwolla.js'
+  new Promise((resolve: () => void): void => {
+    const s = document.createElement('script')
+    s.type = 'text/javascript'
+    s.async = true
+    s.src =
+      environment === 'prod'
+        ? 'https://cdn.dwolla.com/1/dwolla.min.js'
+        : 'https://cdn.dwolla.com/1/dwolla.js'
 
-      s.addEventListener(
-        'load',
-        (): void => {
-          window.dwolla.configure(environment)
-          resolve()
-        }
-      )
+    s.addEventListener('load', (): void => {
+      window.dwolla.configure(environment)
+      resolve()
+    })
 
-      document.body.appendChild(s)
-    }
-  )
+    document.body.appendChild(s)
+  })
 
 type DwollaIAVError = {
   code: string
@@ -68,26 +63,22 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
       dwollaConfig,
     } = this.props
     load(environment)
-      .then(
-        (): void => {
-          // @ts-ignore
-          window.dwolla.iav.start(
-            customerToken,
-            { ...dwollaConfig, container: containerId },
-            (err: DwollaIAVError, res: DwollaIAVResponse): void => {
-              if (err) {
-                this.props.onError(err.message || err.code)
-              }
-              this.props.onSuccess(pluckFundingSource(res))
+      .then((): void => {
+        // @ts-ignore
+        window.dwolla.iav.start(
+          customerToken,
+          { ...dwollaConfig, container: containerId },
+          (err: DwollaIAVError, res: DwollaIAVResponse): void => {
+            if (err) {
+              this.props.onError(err.message || err.code)
             }
-          )
-        }
-      )
-      .catch(
-        (e: string): void => {
-          this.props.onError(e)
-        }
-      )
+            this.props.onSuccess(pluckFundingSource(res))
+          }
+        )
+      })
+      .catch((e: string): void => {
+        this.props.onError(e)
+      })
   }
 
   render() {

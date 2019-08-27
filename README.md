@@ -1,6 +1,6 @@
 # react-dwolla-iav
 
-![npm version](https://img.shields.io/npm/v/react-dwolla-iav.svg)](https://npm.im/react-dwolla-iav) [![CircleCI](https://circleci.com/gh/jane/react-dwolla-iav.svg?style=svg)](https://circleci.com/gh/jane/react-dwolla-iav)
+[![npm version](https://img.shields.io/npm/v/react-dwolla-iav.svg)](https://npm.im/react-dwolla-iav) [![CircleCI](https://circleci.com/gh/jane/react-dwolla-iav.svg?style=svg)](https://circleci.com/gh/jane/react-dwolla-iav)
 
 --------
 

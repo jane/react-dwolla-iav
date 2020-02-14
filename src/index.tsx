@@ -71,8 +71,9 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
           (err: DwollaIAVError, res: DwollaIAVResponse): void => {
             if (err) {
               this.props.onError(err.message || err.code)
+            } else {
+              this.props.onSuccess(pluckFundingSource(res))
             }
-            this.props.onSuccess(pluckFundingSource(res))
           }
         )
       })

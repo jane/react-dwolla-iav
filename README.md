@@ -24,7 +24,7 @@ const onError = (err) => { /* handle err */ }
 const dwollaConfig = {
   backButton: false,
   customerToken: 'asdf',
-  environment: 'sandboox',
+  environment: 'sandbox',
   fallbackToMicroDeposits: false,
   microDeposits: false,
   stylesheets: [],

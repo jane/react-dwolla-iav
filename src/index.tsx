@@ -43,6 +43,7 @@ const pluckFundingSource = (res: DwollaIAVResponse): string => {
 const containerId = '__react-dwolla-iav-container'
 
 type DwollaProps = {
+  testID?: string
   onSuccess: (string) => void
   onError: (string) => void
   dwollaConfig: {
@@ -62,6 +63,7 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
       dwollaConfig: { environment, customerToken },
       dwollaConfig,
     } = this.props
+
     load(environment)
       .then((): void => {
         // @ts-ignore
@@ -83,6 +85,11 @@ export default class Dwolla extends React.Component<DwollaProps, {}> {
   }
 
   render() {
-    return <div id={containerId} />
+    return (
+      <div
+        id={containerId}
+        data-testid={this.props.testID || '__react-dwolla-iav'}
+      />
+    )
   }
 }

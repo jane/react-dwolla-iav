@@ -35,7 +35,7 @@ const pluckFundingSource = (res: DwollaIAVResponse): string => {
   try {
     const href = res._links['funding-source'].href.split('/')
     return href[href.length - 1]
-  } catch (_) {
+  } catch {
     return ''
   }
 }
@@ -57,7 +57,7 @@ type DwollaProps = {
   }
 }
 
-export default class Dwolla extends React.Component<DwollaProps, {}> {
+export default class Dwolla extends React.Component<DwollaProps, unknown> {
   componentDidMount(): void {
     const {
       dwollaConfig: { environment, customerToken },

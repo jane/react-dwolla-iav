@@ -32,22 +32,22 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@babel/cli": "7.10.3",
-    "@babel/core": "7.10.3",
-    "@babel/plugin-proposal-class-properties": "7.10.1",
-    "@babel/preset-env": "7.10.3",
-    "@babel/preset-react": "7.10.1",
-    "@babel/preset-typescript": "7.10.1",
-    "@types/react": "16.9.41",
+    "@babel/cli": "7.10.5",
+    "@babel/core": "7.10.5",
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "@babel/preset-env": "7.10.4",
+    "@babel/preset-react": "7.10.4",
+    "@babel/preset-typescript": "7.10.4",
+    "@types/react": "16.9.43",
     "@types/react-dom": "16.9.8",
-    "eslint": "7.3.1",
-    "eslint-plugin-jane": "8.0.1",
+    "eslint": "7.4.0",
+    "eslint-plugin-jane": "8.0.2",
     "npm-run-all": "4.1.5",
     "prettier": "2.0.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "sortpack": "2.1.5",
-    "typescript": "3.9.5"
+    "typescript": "3.9.6"
   },
   "engines": {
     "node": ">=10.0.0"

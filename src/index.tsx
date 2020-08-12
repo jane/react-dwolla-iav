@@ -52,7 +52,7 @@ type DwollaProps = {
     environment: 'prod' | 'sandbox'
     fallbackToMicroDeposits?: boolean
     microDeposits?: boolean
-    stylesheets?: Array<string>
+    stylesheets?: string[]
     subscriber: (mixed) => void
   }
 }
